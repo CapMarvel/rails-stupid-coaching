@@ -1,19 +1,12 @@
 class QuestionsController < ApplicationController
   def ask
+    @question = params[:question]
   end
 
   def answer
     @answer = ''
     @question = params[:question]
 
-    @answer = if @question.include?('?')
-      'Silly question, get dressed and go to work!'
-
-    elsif @question == 'I am going to work'
-      'Great!'
-
-    else
-      "I don't care, get dressed and go to work!"
-              end
+    @answer = Answer.get_answer(@question)
   end
 end
